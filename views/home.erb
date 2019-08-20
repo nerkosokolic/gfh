@@ -1,0 +1,70 @@
+
+<% @dishes.each do |dish| %>
+<div class="ui-card">
+  <header class="content">
+    <div>
+      <img class="avatar" src="https://via.placeholder.com/50" alt="">
+    </div>
+    <div class="username">dt</div>
+    <div>17h</div>
+  </header>
+  <section class="image-wrapper">
+    <img src="https://via.placeholder.com/800" alt="">
+    <div data-dish-id="<%= dish.id %>" class="heart">♥</div>
+
+    <form action="/likes" method="post">
+      <input type="hidden" name='dish_id' value="<%= dish.id %>">
+      <button>like</button>
+    </form>
+
+  </section>
+  <section class="content">
+    <h2><%= dish.title %></h2>
+    <h4>at GA</h4>
+  </section>
+  <footer class="content">
+    <div>likes <span class="likes-count"><%= dish.likes.count %></span></div>
+  </footer>
+</div>
+<% end %>
+
+<div class="special">me over here !!!!</div>
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+<script>
+
+  var heart = document.querySelector('.heart')
+  // var likesCount = document.querySelector('.likes-count')
+  var hearts = document.querySelectorAll(".heart")
+
+
+
+  var handleClick = function(event) {
+
+    // we want to make an AJEX request
+    // path /likes
+    // HTTP method POST
+
+    var options = {
+      method: 'post',
+      url: '/api/likes',
+      data: { dish_id: event.target.getAttribute('data-dish-id') }
+    }
+    var handleDone = function(resp) {
+      console.log(resp)
+      var likesCountSpan = event.target.closest(".ui-card").querySelector(".likes-count")
+      likesCountSpan.textContent = resp.likes_count
+    }
+    $.ajax(options).done(handleDone)
+  }
+
+  hearts.forEach(heart => {
+    heart.addEventListener('click', handleClick)
+  })
+</script>
+
+<%# Search up DOM - closest(".classname")
+Search down DOM - querySelector(".classname") %>

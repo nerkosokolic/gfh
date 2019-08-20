@@ -1,0 +1,60 @@
+
+.ui-card {
+  width: 350px;
+  background-color: mistyrose;
+}
+
+.ui-card > header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ui-card > footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.content {
+  padding: 10px;
+}
+
+.avatar {
+  border-radius: 50%;
+}
+
+.username {
+  padding-left: 5px;
+  margin-right: auto;
+}
+
+.special {
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+
+.image-wrapper {
+  position: relative;
+}
+
+.image-wrapper img {
+  width: 100%;
+}
+
+.heart {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 3rem;
+  color: red;
+  cursor: pointer;
+  /* display: none; */
+  opacity: 0;
+  transition: all 0.4s linear;
+  /* transform: rotate(90deg); */
+}
+
+.image-wrapper:hover .heart {
+  opacity: 1;
+}

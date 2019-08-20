@@ -1,0 +1,25 @@
+<h1>details</h1>
+
+<%= @dish.title %>
+
+<a href="/dishes/<%= @dish.id %>/edit">edit dish</a>
+
+<%# get is read, post is create, put is update, delete is destroy %>
+<form actions="/dishes/<% @dish.id %>" method="post">
+<input type="hidden" name="_method" value="delete">
+<button>delete</button>
+</form>
+
+<h2>Comments</h2>
+<% if  session[:user_id]%>
+<form action="/comments" method="post">
+<input type='hidden' name="dish_id" value="<%= @dish.id %>"></input>
+<textarea name="body"></textarea> 
+<button>post comment</button>
+</form>
+<% end %>
+
+<% @comments.each do |comment| %>
+<p><%= comment.user.email %>  - <%= comment.body %></p>
+<% end %>
+
